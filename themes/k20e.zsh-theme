@@ -38,9 +38,9 @@ ZSH_THEME_VENV_PROMPT_DEACTIVATED="%{$fg[yellow]%}∅"
 ##############################################################################
 # prompt lines
 ##############################################################################
-K20E_PROMPT_1="%{%f%k%b%u%}"
-K20E_PROMPT_2="%{%F{yellow}%}%~%{%f%}$(git_prompt_info) $(git_prompt_status)%{%f%} $(k20e_aws_prompt_info) $(k20e_venv_prompt_info)%E"
-K20E_PROMPT_3="⚓ "
+K20E_PROMPT_1='%{%f%k%b%u%}'
+K20E_PROMPT_2='%{%F{yellow}%}%~%{%f%}$(git_prompt_info) $(git_prompt_status)%{%f%} $(k20e_aws_prompt_info) $(k20e_venv_prompt_info)%E'
+K20E_PROMPT_3='⚓ '
 
 ##############################################################################
 # command duration
