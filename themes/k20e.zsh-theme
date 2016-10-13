@@ -23,7 +23,7 @@ ZSH_THEME_AWS_PROMPT_PREFIX="%{$fg[cyan]%}aws:"
 ZSH_THEME_AWS_PROMPT_SUFFIX="%{%u%f%b%}"
 ZSH_THEME_AWS_PROMPT="%{$fg_bold[green]%}"
 ZSH_THEME_AWS_PROMPT_UNSET="%{$fg[yellow]%}∅"
-ZSH_THEME_AWS_PROMPT_PROD="%{$fg_bold[black]%K{red}%}"
+ZSH_THEME_AWS_PROMPT_PROD="%{%U$fg_bold[red]%K{yellow}%}"
 
 ##############################################################################
 # virtual environment
@@ -36,8 +36,32 @@ ZSH_THEME_VENV_PROMPT_ACTIVATED="%{$fg_bold[green]%}"
 ZSH_THEME_VENV_PROMPT_DEACTIVATED="%{$fg[yellow]%}∅"
 
 ##############################################################################
+# prompt lines
+##############################################################################
+K20E_PROMPT_1="%{%f%k%b%u%}"
+K20E_PROMPT_2="%{%F{yellow}%}%~%{%f%}$(git_prompt_info) $(git_prompt_status)%{%f%} $(k20e_aws_prompt_info) $(k20e_venv_prompt_info)%E"
+K20E_PROMPT_3="⚓ "
+
+##############################################################################
+# command duration
+##############################################################################
+function preexec() {
+    start=${start:-${SECONDS}}
+}
+
+function precmd() {
+    if [ ${start} ]; then
+        duration=$((${SECONDS} - ${start}))
+        PROMPT="${K20E_PROMPT_1}
+${K20E_PROMPT_2} ${duration}s
+${K20E_PROMPT_3}"
+        unset start
+    fi
+}
+
+##############################################################################
 # THE PROMPT
 ##############################################################################
-PROMPT='%{%f%k%b%u%}
-%{%F{yellow}%}%~%{%f%}$(git_prompt_info) $(git_prompt_status)%{%f%} $(k20e_aws_prompt_info) $(k20e_venv_prompt_info)%E
-⚓ '
+PROMPT="${K20E_PROMPT_1}
+${K20E_PROMPT_2}
+${K20E_PROMPT_3}"
